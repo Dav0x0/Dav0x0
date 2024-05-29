@@ -2,7 +2,7 @@
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-<a href="https://idx.google.com/import?url=https://github.com/google-gemini/go-dreaming-of-adventure-sample">
+<a href="https://idx.google.com/import?url=https://github.com/Davidaprilio/davidaprilio.github.io">
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://cdn.idx.dev/btn/open_dark_32@2x.png">
   <source media="(prefers-color-scheme: light)" srcset="https://cdn.idx.dev/btn/open_light_32@2x.png">
