@@ -3,7 +3,9 @@
 @tailwind utilities;
 
 
-
+body {
+    @apply w-screen overflow-x-hidden relative
+}
 
 .MagicCurtain_MagicCurtainRoot__x0JKd {
     position: relative;
@@ -28,7 +30,7 @@
 .MagicCurtain_MagicCurtainItem__xLo6I {
     position: relative;
     z-index: 0;
-    --animation-duration: 600ms
+    --animation-duration: 6000ms
 }
 
 @media (min-width: 1280px) {
@@ -239,4 +241,12 @@
         opacity: 0;
         transform: rotateX(-10deg) scale(.95)
     }
+}
+
+[data-mode=light] {
+    --pg-color1: #fff;
+    --pg-color2: #fff;
+    --pg-color3: #fff;
+    --pg-color4: #fff;
+    --pg-color5: #fff;
 }
