@@ -6,6 +6,7 @@ export type ThemeMode = 'light' | 'dark' | 'system'
 export const ThemeContext = createContext({
     theme: 'dark' as ThemeMode,
     setTheme: (theme: ThemeMode) => {theme},
+    setTransition: (isActive: boolean) => {isActive},
     isOnTransition: false
 });
 
@@ -17,26 +18,31 @@ export default function ThemeProvider(props: ThemeProviderProps) {
     const [animatiionRun, setAnimationRun] = useState(false);
 
     useEffect(() => {
-        if (animatiionRun === false) {
-            setAnimationRun(true);
-            // Animation duration waiting
-            const el = document.querySelector('.MagicCurtain_MagicCurtainItem__xLo6I[data-visibility="animating-out"]');
-            if (el) {
-                let animationDuration = window.getComputedStyle(el).getPropertyValue('--animation-duration') || '0s';
-                animationDuration = convertCssTimeValueToMilliseconds(animationDuration)
-                let { num: ms } = getCssPropUnitMap(animationDuration)
-                console.log('Animation duration', ms, 'ms');
-                setTimeout(() => {
+        async function setTheme() {
+            if (animatiionRun === false) {
+                setAnimationRun(true);
+                // Animation duration waiting
+                const el = document.querySelector('.MagicCurtain_MagicCurtainItem__xLo6I[data-visibility="animating-out"]');
+                if (el) {
+                    let animationDuration = window.getComputedStyle(el).getPropertyValue('--animation-duration') || '0s';
+                    animationDuration = convertCssTimeValueToMilliseconds(animationDuration)
+                    let { num: ms } = getCssPropUnitMap(animationDuration)
+                    console.log('Animation duration', ms, 'ms');
+                    await new Promise(r => setTimeout(r, ms));
                     el.setAttribute('data-visibility', 'hidden');
-                    setAnimationRun(false);
-                }, ms);
+                }
+                setAnimationRun(false);
             }
         }
+        setTheme();
     }, [activeTheme]);
 
     const attrs = {
         theme: activeTheme,
         isOnTransition: animatiionRun,
+        setTransition: (isActive: boolean) => {
+            setAnimationRun(isActive);  
+        },
         setTheme: (theme: ThemeMode) => {
             setActiveTheme(theme);
         }
